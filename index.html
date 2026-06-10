@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qeltec — Helping Businesses Separate Signal From Noise</title>
+<meta name="description" content="Qeltec builds decision-support systems that help businesses filter noise, identify what matters, and act with confidence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0a1812;
+  --bg2: #0e1f17;
+  --bg3: #122318;
+  --green: #3ecf8e;
+  --green-mid: #2aad72;
+  --green-dim: rgba(62,207,142,0.10);
+  --rule: rgba(62,207,142,0.10);
+  --white: #eef5f1;
+  --muted: rgba(238,245,241,0.45);
+  --ghost: rgba(238,245,241,0.18);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Inter', system-ui, sans-serif;
+  --max: 780px;
+  --max-wide: 1080px;
+}
+html { font-size: 16px; scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--bg); color: var(--white); line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: rgba(10,24,18,0.70);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-inner {
+  max-width: var(--max-wide); margin: 0 auto; padding: 0 2rem;
+  height: 60px; display: flex; align-items: center; justify-content: space-between;
+}
+.logo { display: flex; align-items: baseline; text-decoration: none; }
+.logo-qel { font-family: var(--serif); font-weight: 700; font-size: 22px; color: var(--white); letter-spacing: -0.01em; }
+.logo-tec { font-family: var(--serif); font-weight: 700; font-size: 22px; color: var(--green); letter-spacing: -0.01em; }
+.nav-cta {
+  font-size: 13px; font-weight: 500; color: var(--bg);
+  background: var(--green); padding: 9px 22px; border-radius: 6px;
+  text-decoration: none; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--green-mid); color: var(--white); }
+
+#hero {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 2rem 80px; overflow: hidden;
+}
+#aurora-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+.hero-content { position: relative; z-index: 2; max-width: 800px; }
+.eyebrow {
+  display: inline-block; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--green);
+  border: 1px solid rgba(62,207,142,0.28); padding: 5px 16px;
+  border-radius: 100px; margin-bottom: 2rem;
+}
+h1 {
+  font-family: var(--serif); font-size: clamp(44px, 8vw, 82px);
+  line-height: 1.05; font-weight: 700; color: var(--white);
+  margin-bottom: 1.75rem; letter-spacing: -0.02em;
+}
+h1 em { font-style: italic; color: var(--green); font-weight: 400; }
+.hero-sub {
+  font-size: clamp(16px, 2.2vw, 19px); line-height: 1.8;
+  color: var(--muted); max-width: 560px; margin: 0 auto 2.5rem;
+}
+.hero-cta-row { display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block; background: var(--green); color: var(--bg);
+  font-size: 14px; font-weight: 500; padding: 14px 32px; border-radius: 6px;
+  text-decoration: none; transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--green-mid); color: var(--white); }
+.btn-ghost {
+  display: inline-block; color: var(--muted); font-size: 14px; font-weight: 500;
+  text-decoration: none; border-bottom: 1px solid var(--ghost); padding-bottom: 2px;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--white); }
+.scroll-hint { margin-top: 4rem; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.scroll-hint span { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ghost); }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(62,207,142,0.35), transparent); }
+
+section { padding: 100px 2rem; }
+.inner { max-width: var(--max); margin: 0 auto; }
+.inner-wide { max-width: var(--max-wide); margin: 0 auto; }
+.section-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 1.5rem;
+}
+h2 {
+  font-family: var(--serif); font-size: clamp(30px, 4.5vw, 48px);
+  font-weight: 700; line-height: 1.15; color: var(--white);
+  margin-bottom: 1.5rem; letter-spacing: -0.02em;
+}
+h2 em { font-style: italic; color: var(--green); font-weight: 400; }
+
+#how { background: var(--bg); border-top: 1px solid var(--rule); }
+.flow-row {
+  display: flex; align-items: stretch; margin-top: 3.5rem;
+  background: rgba(255,255,255,0.02); border: 1px solid var(--rule);
+  border-radius: 12px; overflow: hidden;
+}
+.flow-item {
+  flex: 1; padding: 2rem 1.5rem; text-align: center;
+  border-right: 1px solid var(--rule);
+}
+.flow-item:last-child { border-right: none; }
+.flow-item.signal { background: rgba(62,207,142,0.06); }
+.flow-number { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; color: var(--ghost); text-transform: uppercase; margin-bottom: 8px; }
+.flow-word { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--white); }
+.flow-item.signal .flow-word { color: var(--green); }
+.how-copy { margin-top: 2.5rem; }
+.how-copy p { font-size: 16px; line-height: 1.85; color: var(--muted); margin-bottom: 1rem; max-width: 600px; }
+.how-copy strong { color: var(--white); font-weight: 500; }
+
+#services { background: var(--bg2); border-top: 1px solid var(--rule); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+  border-radius: 12px; overflow: hidden; margin-top: 3rem;
+}
+.service-card { background: var(--bg2); padding: 2.25rem 2rem; transition: background 0.3s; }
+.service-card:hover { background: rgba(62,207,142,0.04); }
+.service-num { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; color: var(--green); opacity: 0.6; margin-bottom: 1rem; }
+.service-card h3 { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; line-height: 1.3; }
+.service-card p { font-size: 14px; line-height: 1.8; color: var(--muted); }
+
+#example { background: var(--bg); border-top: 1px solid var(--rule); }
+.example-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.big-number { font-family: var(--serif); font-size: clamp(64px, 10vw, 100px); font-weight: 700; color: var(--white); line-height: 1; letter-spacing: -0.04em; }
+.big-number span { color: var(--green); }
+.stat-label { font-size: 14px; color: var(--muted); margin-top: 0.5rem; letter-spacing: 0.04em; }
+.example-stat-block { margin-top: 2rem; }
+.example-right { padding-top: 0.5rem; }
+.example-right p { font-size: 15px; line-height: 1.85; color: var(--muted); margin-bottom: 1rem; }
+.output-list { list-style: none; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 10px; }
+.output-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--white); font-weight: 500; }
+.output-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+.clarity-line { font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--green); margin-top: 1.5rem; }
+
+#who { background: var(--bg2); border-top: 1px solid var(--rule); }
+.who-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+  border-radius: 12px; overflow: hidden; margin-top: 3rem;
+}
+.who-card { background: var(--bg2); padding: 2rem 1.75rem; transition: background 0.3s; }
+.who-card:hover { background: rgba(62,207,142,0.05); }
+.who-card-title { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+.who-card p { font-size: 13px; line-height: 1.7; color: var(--muted); }
+.who-sub { margin-top: 2rem; font-size: 16px; color: var(--muted); max-width: 540px; line-height: 1.75; }
+
+#contact {
+  padding: 130px 2rem; text-align: center;
+  background: var(--bg); border-top: 1px solid var(--rule);
+  position: relative; overflow: hidden;
+}
+#cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+#contact .inner { position: relative; z-index: 2; }
+#contact h2 { margin-bottom: 1rem; }
+#contact p { font-size: 17px; color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; line-height: 1.75; }
+.cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-outline {
+  display: inline-block; color: var(--muted); font-size: 14px; font-weight: 500;
+  border: 1px solid var(--rule); padding: 13px 28px; border-radius: 6px;
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+}
+.btn-outline:hover { border-color: rgba(62,207,142,0.4); color: var(--white); }
+
+footer { background: var(--bg2); border-top: 1px solid var(--rule); padding: 2rem; }
+.footer-inner { max-width: var(--max-wide); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 12px; color: var(--ghost); }
+
+@media (max-width: 700px) {
+  section { padding: 72px 1.25rem; }
+  #hero { padding: 100px 1.25rem 64px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .example-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .flow-row { flex-direction: column; }
+  .flow-item { border-right: none; border-bottom: 1px solid var(--rule); }
+  .flow-item:last-child { border-bottom: none; }
+  .nav-inner { padding: 0 1.25rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<nav aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="#" class="logo" aria-label="Qeltec home">
+      <span class="logo-qel">Qel</span><span class="logo-tec">tec</span>
+    </a>
+    <a href="#contact" class="nav-cta">Book a call</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <canvas id="aurora-canvas" aria-hidden="true"></canvas>
+  <div class="hero-content">
+    <span class="eyebrow">Decision Intelligence</span>
+    <h1>Helping businesses separate<br><em>signal</em> from noise.</h1>
+    <p class="hero-sub">Most companies don't have an information problem. They have a noise problem. Qeltec builds decision-support systems that filter what's irrelevant and surface what matters.</p>
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn-primary">Book a discovery call</a>
+      <a href="#services" class="btn-ghost">See what we build →</a>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="inner">
+    <p class="section-label">How we think</p>
+    <h2>We don't process more data.<br>We reduce it <em>to what counts.</em></h2>
+    <div class="flow-row" role="img" aria-label="Flow: Noise reduced to Signal, then Insight, Decision, Action">
+      <div class="flow-item">
+        <div class="flow-number">Start</div>
+        <div class="flow-word">Noise</div>
+      </div>
+      <div class="flow-item signal">
+        <div class="flow-number">Filter</div>
+        <div class="flow-word">Signal</div>
+      </div>
+      <div class="flow-item signal">
+        <div class="flow-number">Distil</div>
+        <div class="flow-word">Insight</div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-number">Inform</div>
+        <div class="flow-word">Decision</div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-number">Output</div>
+        <div class="flow-word">Action</div>
+      </div>
+    </div>
+    <div class="how-copy">
+      <p>When a system is designed correctly, decision-makers shouldn't need to review hundreds of updates. They should receive a small number of insights that actually deserve attention.</p>
+      <p>More information doesn't create clarity. <strong>The right information does.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="inner-wide">
+    <p class="section-label">What we build</p>
+    <h2>Four systems.<br><em>One goal: better decisions.</em></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Market Intelligence Systems</h3>
+        <p>Monitor competitors, industry developments, customer conversations, and market signals automatically — without manual research hours.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Research Automation</h3>
+        <p>Transform hours of manual research into concise, actionable intelligence — structured for decisions, not reading.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Executive Briefings</h3>
+        <p>Daily or weekly intelligence summaries designed for decision-makers, not analysts. Delivered in the format that fits how you work.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Custom Decision Workflows</h3>
+        <p>Purpose-built systems that help teams identify opportunities, risks, and priorities faster than traditional processes allow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="example">
+  <div class="inner">
+    <div class="example-inner">
+      <div>
+        <p class="section-label">A practical example</p>
+        <div class="example-stat-block">
+          <div class="big-number">1,000<span>.</span></div>
+          <p class="stat-label">articles, updates and announcements — every week</p>
+        </div>
+      </div>
+      <div class="example-right">
+        <p>Most teams don't have time to review 1,000 pieces of content per week. A decision-support system can filter, categorise, prioritise, and summarise that volume into a short briefing focused on what actually changes your decisions:</p>
+        <ul class="output-list">
+          <li>Emerging opportunities</li>
+          <li>Competitive movements</li>
+          <li>Potential risks</li>
+          <li>Recommended actions</li>
+        </ul>
+        <p class="clarity-line">The output isn't more information. It's clarity.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="inner-wide">
+    <p class="section-label">Who we work with</p>
+    <h2>Built for people who move fast<br>and <em>decide often.</em></h2>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-card-title">Founders</div>
+        <p>Strategic clarity without the research overhead.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-card-title">Marketing Teams</div>
+        <p>Stay ahead of competitor moves and market shifts.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-card-title">Agencies</div>
+        <p>Intelligence infrastructure for your clients, built to scale.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-card-title">Operations Leaders</div>
+        <p>Surface risks and priorities before they become problems.</p>
+      </div>
+    </div>
+    <p class="who-sub">Businesses that want faster, better-informed decisions — without spending more time gathering information.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <canvas id="cta-canvas" aria-hidden="true"></canvas>
+  <div class="inner">
+    <h2>Is your team drowning<br>in <em>information?</em></h2>
+    <p>If you're spending too much time collecting information and not enough time acting on it, let's have a conversation.</p>
+    <div class="cta-group">
+      <a href="mailto:hello@qeltec.com" class="btn-primary">Book a discovery call</a>
+      <a href="mailto:hello@qeltec.com" class="btn-outline">Send us a message →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="logo" aria-label="Qeltec home">
+      <span class="logo-qel">Qel</span><span class="logo-tec">tec</span>
+    </a>
+    <p class="footer-copy">© 2025 Qeltec. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function Aurora(canvasId, isMini) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H;
+
+    const blobs = [];
+    const count = isMini ? 4 : 7;
+
+    const palette = [
+      { r: 30, g: 180, b: 110 },
+      { r: 20, g: 140, b: 90  },
+      { r: 10, g: 100, b: 70  },
+      { r: 50, g: 200, b: 130 },
+      { r: 15, g: 160, b: 100 },
+      { r: 8,  g: 80,  b: 55  },
+      { r: 40, g: 210, b: 120 },
+    ];
+
+    for (let i = 0; i < count; i++) {
+      const c = palette[i % palette.length];
+      blobs.push({
+        x: Math.random(),
+        y: Math.random() * 0.8,
+        rx: 0.3 + Math.random() * 0.45,
+        ry: 0.15 + Math.random() * 0.3,
+        r: c.r, g: c.g, b: c.b,
+        alpha: 0.06 + Math.random() * 0.10,
+        driftX: (Math.random() - 0.5) * 0.000008,
+        driftY: (Math.random() - 0.5) * 0.000005,
+        pulseSpeed: 0.00003 + Math.random() * 0.00004,
+        pulsePhase: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.000006,
+        rot: Math.random() * Math.PI,
+      });
+    }
+
+    function resize() {
+      W = canvas.offsetWidth;
+      H = canvas.offsetHeight;
+      canvas.width = W * devicePixelRatio;
+      canvas.height = H * devicePixelRatio;
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+    }
+
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+
+      blobs.forEach(b => {
+        b.x += b.driftX;
+        b.y += b.driftY;
+        if (b.x < -0.3) b.x = 1.3;
+        if (b.x > 1.3)  b.x = -0.3;
+        if (b.y < -0.2) b.y = 1.0;
+        if (b.y > 1.0)  b.y = -0.2;
+        b.rot += b.rotSpeed;
+
+        const pulse = 1 + 0.12 * Math.sin(t * b.pulseSpeed + b.pulsePhase);
+        const cx = b.x * W;
+        const cy = b.y * H;
+        const rx = b.rx * W * pulse;
+        const ry = b.ry * H * pulse;
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(b.rot);
+        const grd = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(rx, ry));
+        grd.addColorStop(0,   `rgba(${b.r},${b.g},${b.b},${b.alpha})`);
+        grd.addColorStop(0.5, `rgba(${b.r},${b.g},${b.b},${b.alpha * 0.4})`);
+        grd.addColorStop(1,   `rgba(${b.r},${b.g},${b.b},0)`);
+        ctx.scale(rx / Math.max(rx, ry), ry / Math.max(rx, ry));
+        ctx.beginPath();
+        ctx.arc(0, 0, Math.max(rx, ry), 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+        ctx.restore();
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    requestAnimationFrame(draw);
+  }
+
+  Aurora('aurora-canvas', false);
+  Aurora('cta-canvas', true);
+})();
+</script>
+</body>
+</html>
