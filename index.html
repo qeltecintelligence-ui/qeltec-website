@@ -809,14 +809,12 @@ function submitLead(){
         document.getElementById('lead-company').value;
 
     fetch('https://script.google.com/macros/s/AKfycbyE1YleHS9t5S8ksqLytXKZfriqN2MQ459h0hVX3V7vlXHVrvBiro3crkRM-JSNCLKBDg/exec', {
+  method: 'POST',
+  mode: 'no-cors',
+  body: JSON.stringify(leadData)
+})
 
-        method: 'POST',
-
-        body: JSON.stringify(leadData)
-
-    })
-
-    .then(response => {
+    .then(() => {
 
         document.getElementById('chat-messages').innerHTML = `
 
