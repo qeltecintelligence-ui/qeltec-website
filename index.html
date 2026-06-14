@@ -669,39 +669,192 @@ closeBtn.addEventListener('click', () => {
 container.style.display = 'none';
 });
 
+let leadData = {
+    challenge: "",
+    name: "",
+    email: "",
+    company: ""
+};
+
 function selectOption(option){
 
-document.getElementById('chat-messages').innerHTML = `
+    leadData.challenge = option;
 
-<div class="bot-message">
+    document.getElementById('chat-messages').innerHTML = `
 
-You selected:
+    <div class="bot-message">
 
-<br><br>
+    <strong>${option}</strong>
 
-<strong>${option}</strong>
+    <br><br>
 
-<br><br>
+    Tell us a little about yourself.
 
-This is exactly the type of workflow Qeltec helps organizations streamline.
+    <br><br>
 
-<br><br>
+    What is your name?
 
-The next version of this advisor will generate recommendations based on your specific situation.
+    <br><br>
 
-</div>
+    <input
+        id="lead-name"
+        type="text"
+        placeholder="Your name"
+        style="
+            width:100%;
+            padding:12px;
+            border-radius:10px;
+            border:1px solid rgba(45,212,167,.2);
+            background:#12211d;
+            color:white;
+        "
+    >
 
-`;
+    </div>
 
-document.getElementById('chat-options').innerHTML = `
+    `;
 
-<button onclick="window.location.href='mailto:hello@qeltec.com'">
+    document.getElementById('chat-options').innerHTML = `
 
-Request Assessment
+    <button onclick="saveName()">
+    Continue
+    </button>
 
-</button>
+    `;
+}
 
-`;
+function saveName(){
+
+    leadData.name =
+        document.getElementById('lead-name').value;
+
+    document.getElementById('chat-messages').innerHTML = `
+
+    <div class="bot-message">
+
+    What is your email address?
+
+    <br><br>
+
+    <input
+        id="lead-email"
+        type="email"
+        placeholder="name@company.com"
+        style="
+            width:100%;
+            padding:12px;
+            border-radius:10px;
+            border:1px solid rgba(45,212,167,.2);
+            background:#12211d;
+            color:white;
+        "
+    >
+
+    </div>
+
+    `;
+
+    document.getElementById('chat-options').innerHTML = `
+
+    <button onclick="saveEmail()">
+    Continue
+    </button>
+
+    `;
+}
+
+function saveEmail(){
+
+    leadData.email =
+        document.getElementById('lead-email').value;
+
+    document.getElementById('chat-messages').innerHTML = `
+
+    <div class="bot-message">
+
+    What company are you with?
+
+    <br><br>
+
+    <input
+        id="lead-company"
+        type="text"
+        placeholder="Company name"
+        style="
+            width:100%;
+            padding:12px;
+            border-radius:10px;
+            border:1px solid rgba(45,212,167,.2);
+            background:#12211d;
+            color:white;
+        "
+    >
+
+    </div>
+
+    `;
+
+    document.getElementById('chat-options').innerHTML = `
+
+    <button onclick="submitLead()">
+    Submit Assessment
+    </button>
+
+    `;
+}
+
+function submitLead(){
+
+    leadData.company =
+        document.getElementById('lead-company').value;
+
+    fetch('https://script.google.com/macros/s/AKfycbyE1YleHS9t5S8ksqLytXKZfriqN2MQ459h0hVX3V7vlXHVrvBiro3crkRM-JSNCLKBDg/exec', {
+
+        method: 'POST',
+
+        body: JSON.stringify(leadData)
+
+    })
+
+    .then(response => {
+
+        document.getElementById('chat-messages').innerHTML = `
+
+        <div class="bot-message">
+
+        Assessment received.
+
+        <br><br>
+
+        Thank you for your interest in Qeltec.
+
+        <br><br>
+
+        We'll review your information and follow up shortly.
+
+        </div>
+
+        `;
+
+        document.getElementById('chat-options').innerHTML = '';
+
+    })
+
+    .catch(error => {
+
+        document.getElementById('chat-messages').innerHTML = `
+
+        <div class="bot-message">
+
+        Something went wrong.
+
+        Please email hello@qeltec.com.
+
+        </div>
+
+        `;
+
+    });
 
 }
 
