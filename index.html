@@ -480,5 +480,169 @@ footer { background: var(--bg2); border-top: 1px solid var(--rule); padding: 2re
   Aurora('cta-canvas', true);
 })();
 </script>
+  <style>
+#chat-toggle{
+position:fixed;
+bottom:25px;
+right:25px;
+width:60px;
+height:60px;
+border-radius:50%;
+background:#7c3aed;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+cursor:pointer;
+z-index:9999;
+}
+
+#chat-container{
+position:fixed;
+bottom:100px;
+right:25px;
+width:340px;
+background:white;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+display:none;
+overflow:hidden;
+z-index:9999;
+font-family:Arial,sans-serif;
+}
+
+#chat-header{
+background:#7c3aed;
+color:white;
+padding:15px;
+font-weight:bold;
+display:flex;
+justify-content:space-between;
+}
+
+#chat-messages{
+padding:15px;
+max-height:300px;
+overflow-y:auto;
+font-size:14px;
+}
+
+.bot-message{
+background:#f3f4f6;
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.user-message{
+background:#ede9fe;
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+text-align:right;
+}
+
+#chat-options{
+padding:10px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+}
+
+#chat-options button{
+cursor:pointer;
+padding:8px 10px;
+border:none;
+border-radius:8px;
+background:#e5e7eb;
+}
+</style>
+  <!-- Qeltec Chatbot -->
+<div id="chat-toggle">💬</div>
+
+<div id="chat-container">
+  <div id="chat-header">
+    Qeltec Intelligence Consultant
+    <span id="chat-close">✕</span>
+  </div>
+
+  <div id="chat-messages">
+    <div class="bot-message">
+      Hi 👋<br><br>
+      What best describes your role?
+    </div>
+  </div>
+
+  <div id="chat-options">
+    <button onclick="selectRole('Founder')">Founder</button>
+    <button onclick="selectRole('Marketing Manager')">Marketing Manager</button>
+    <button onclick="selectRole('Agency Owner')">Agency Owner</button>
+    <button onclick="selectRole('Other')">Other</button>
+  </div>
+</div>
+  <script>
+const toggle = document.getElementById('chat-toggle');
+const container = document.getElementById('chat-container');
+const closeBtn = document.getElementById('chat-close');
+
+toggle.onclick = () => {
+container.style.display='block';
+};
+
+closeBtn.onclick = () => {
+container.style.display='none';
+};
+
+function addMessage(text,type='bot'){
+const box=document.getElementById('chat-messages');
+
+const msg=document.createElement('div');
+msg.className=type+'-message';
+msg.innerHTML=text;
+
+box.appendChild(msg);
+box.scrollTop=box.scrollHeight;
+}
+
+function selectRole(role){
+
+addMessage(role,'user');
+
+document.getElementById('chat-options').innerHTML=`
+<button onclick="selectProblem('Market Research')">Market Research</button>
+<button onclick="selectProblem('Competitor Monitoring')">Competitor Monitoring</button>
+<button onclick="selectProblem('Reporting')">Reporting</button>
+<button onclick="selectProblem('Lead Research')">Lead Research</button>
+`;
+
+addMessage('What takes up the most time today?');
+}
+
+function selectProblem(problem){
+
+addMessage(problem,'user');
+
+document.getElementById('chat-options').innerHTML=`
+<button onclick="finalStep()">Under 5 hrs</button>
+<button onclick="finalStep()">5-10 hrs</button>
+<button onclick="finalStep()">10-20 hrs</button>
+<button onclick="finalStep()">20+ hrs</button>
+`;
+
+addMessage('How many hours per week does your team spend on this?');
+}
+
+function finalStep(){
+
+addMessage('Thanks! Based on your answers, there may be opportunities to automate research and reporting workflows.');
+
+document.getElementById('chat-options').innerHTML=`
+<a href="mailto:hello@qeltec.com" style="text-decoration:none;">
+<button>Book Free Assessment</button>
+</a>
+`;
+}
+</script>
 </body>
 </html>
