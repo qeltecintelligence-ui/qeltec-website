@@ -481,5 +481,222 @@ footer { background: var(--bg2); border-top: 1px solid var(--rule); padding: 2re
 })();
 
 </script>
+  <style>
+
+#chat-toggle{
+position:fixed;
+bottom:30px;
+right:30px;
+width:64px;
+height:64px;
+border-radius:50%;
+background:#2dd4a7;
+color:#02140f;
+border:none;
+cursor:pointer;
+z-index:10001;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+font-weight:600;
+box-shadow:0 10px 30px rgba(45,212,167,.20);
+transition:.3s;
+}
+
+#chat-toggle:hover{
+transform:translateY(-2px);
+}
+
+#chat-container{
+position:fixed;
+bottom:110px;
+right:30px;
+width:420px;
+background:#07100e;
+border:1px solid rgba(45,212,167,.12);
+border-radius:18px;
+overflow:hidden;
+display:none;
+z-index:10000;
+box-shadow:0 25px 60px rgba(0,0,0,.50);
+}
+
+#chat-header{
+background:#07100e;
+padding:20px;
+border-bottom:1px solid rgba(45,212,167,.08);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+#chat-title{
+font-family:Georgia, serif;
+font-size:22px;
+color:#f5f5f5;
+}
+
+#chat-close{
+cursor:pointer;
+color:#8ea29b;
+font-size:24px;
+}
+
+#chat-messages{
+padding:24px;
+}
+
+.bot-message{
+font-family:Georgia, serif;
+color:#d8e3df;
+line-height:1.8;
+font-size:16px;
+}
+
+#chat-options{
+padding:0 24px 24px 24px;
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+#chat-options button{
+background:transparent;
+border:1px solid rgba(45,212,167,.20);
+color:#d8e3df;
+padding:10px 14px;
+border-radius:999px;
+cursor:pointer;
+transition:.25s;
+font-size:14px;
+}
+
+#chat-options button:hover{
+background:#2dd4a7;
+color:#02140f;
+}
+
+@media(max-width:768px){
+
+#chat-container{
+width:92%;
+right:4%;
+}
+
+}
+
+</style>
+  <div id="chat-toggle">
+Q
+</div>
+
+<div id="chat-container">
+
+<div id="chat-header">
+<div id="chat-title">
+Qeltec Intelligence Advisor
+</div>
+<div id="chat-close">×</div>
+</div>
+
+<div id="chat-messages">
+
+<div class="bot-message">
+
+Most businesses don't have an information problem.
+
+<br><br>
+
+They have a signal-to-noise problem.
+
+<br><br>
+
+Tell us where your team spends the most time gathering information and we'll identify potential automation opportunities.
+
+<br><br>
+
+What would you like to improve?
+
+</div>
+
+</div>
+
+<div id="chat-options">
+
+<button onclick="selectOption('Market Research')">
+Market Research
+</button>
+
+<button onclick="selectOption('Competitor Monitoring')">
+Competitor Monitoring
+</button>
+
+<button onclick="selectOption('Executive Reporting')">
+Executive Reporting
+</button>
+
+<button onclick="selectOption('Lead Intelligence')">
+Lead Intelligence
+</button>
+
+<button onclick="selectOption('Other')">
+Other
+</button>
+
+</div>
+
+</div>
+  <script>
+
+const toggle = document.getElementById('chat-toggle');
+const container = document.getElementById('chat-container');
+const closeBtn = document.getElementById('chat-close');
+
+toggle.addEventListener('click', () => {
+container.style.display = 'block';
+});
+
+closeBtn.addEventListener('click', () => {
+container.style.display = 'none';
+});
+
+function selectOption(option){
+
+document.getElementById('chat-messages').innerHTML = `
+
+<div class="bot-message">
+
+You selected:
+
+<br><br>
+
+<strong>${option}</strong>
+
+<br><br>
+
+This is exactly the type of workflow Qeltec helps organizations streamline.
+
+<br><br>
+
+The next version of this advisor will generate recommendations based on your specific situation.
+
+</div>
+
+`;
+
+document.getElementById('chat-options').innerHTML = `
+
+<button onclick="window.location.href='mailto:hello@qeltec.com'">
+
+Request Assessment
+
+</button>
+
+`;
+
+}
+
+</script>
 </body>
 </html>
