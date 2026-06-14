@@ -581,68 +581,98 @@ background:#e5e7eb;
     <button onclick="selectRole('Other')">Other</button>
   </div>
 </div>
-  <script>
+ <script>
 const toggle = document.getElementById('chat-toggle');
 const container = document.getElementById('chat-container');
 const closeBtn = document.getElementById('chat-close');
 
 toggle.onclick = () => {
-container.style.display='block';
+    container.style.display = 'block';
 };
 
 closeBtn.onclick = () => {
-container.style.display='none';
+    container.style.display = 'none';
 };
 
-function addMessage(text,type='bot'){
-const box=document.getElementById('chat-messages');
+function addMessage(text, type = 'bot') {
+    const box = document.getElementById('chat-messages');
 
-const msg=document.createElement('div');
-msg.className=type+'-message';
-msg.innerHTML=text;
+    const msg = document.createElement('div');
+    msg.className = type + '-message';
+    msg.innerHTML = text;
 
-box.appendChild(msg);
-box.scrollTop=box.scrollHeight;
+    box.appendChild(msg);
+    box.scrollTop = box.scrollHeight;
 }
 
-function selectRole(role){
+function selectRole(role) {
 
-addMessage(role,'user');
+    addMessage(role, 'user');
 
-document.getElementById('chat-options').innerHTML=`
-<button onclick="selectProblem('Market Research')">Market Research</button>
-<button onclick="selectProblem('Competitor Monitoring')">Competitor Monitoring</button>
-<button onclick="selectProblem('Reporting')">Reporting</button>
-<button onclick="selectProblem('Lead Research')">Lead Research</button>
-`;
+    document.getElementById('chat-options').innerHTML = `
+        <button onclick="selectProblem('Market Research')">Market Research</button>
+        <button onclick="selectProblem('Competitor Monitoring')">Competitor Monitoring</button>
+        <button onclick="selectProblem('Reporting')">Reporting</button>
+        <button onclick="selectProblem('Lead Research')">Lead Research</button>
+    `;
 
-addMessage('What takes up the most time today?');
+    addMessage(
+        'What takes up the most time in your business today?'
+    );
 }
 
-function selectProblem(problem){
+function selectProblem(problem) {
 
-addMessage(problem,'user');
+    addMessage(problem, 'user');
 
-document.getElementById('chat-options').innerHTML=`
-<button onclick="finalStep()">Under 5 hrs</button>
-<button onclick="finalStep()">5-10 hrs</button>
-<button onclick="finalStep()">10-20 hrs</button>
-<button onclick="finalStep()">20+ hrs</button>
-`;
+    document.getElementById('chat-options').innerHTML = `
+        <button onclick="finalStep('Under 5 hours')">Under 5 hrs</button>
+        <button onclick="finalStep('5-10 hours')">5-10 hrs</button>
+        <button onclick="finalStep('10-20 hours')">10-20 hrs</button>
+        <button onclick="finalStep('20+ hours')">20+ hrs</button>
+    `;
 
-addMessage('How many hours per week does your team spend on this?');
+    addMessage(
+        'How many hours per week does your team spend on this?'
+    );
 }
 
-function finalStep(){
+function finalStep(hours) {
 
-addMessage('Thanks! Based on your answers, there may be opportunities to automate research and reporting workflows.');
+    addMessage(hours, 'user');
 
-document.getElementById('chat-options').innerHTML=`
-<a href="mailto:hello@qeltec.com" style="text-decoration:none;">
-<button>Book Free Assessment</button>
-</a>
-`;
+    addMessage(`
+        Based on your answers, there may be opportunities to automate research, monitoring, and reporting workflows.
+
+        <br><br>
+
+        Would you like a free automation assessment?
+    `);
+
+    document.getElementById('chat-options').innerHTML = `
+        <a href="mailto:hello@qeltec.com?subject=Free Automation Assessment">
+            <button>Book Free Assessment</button>
+        </a>
+    `;
 }
+
+/* Auto-open after scrolling */
+
+let chatbotShown = false;
+
+window.addEventListener('scroll', () => {
+
+    const scrollPercent =
+        (window.scrollY /
+        (document.body.scrollHeight - window.innerHeight)) * 100;
+
+    if (scrollPercent > 35 && !chatbotShown) {
+
+        container.style.display = 'block';
+
+        chatbotShown = true;
+    }
+});
 </script>
 </body>
 </html>
